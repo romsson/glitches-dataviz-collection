@@ -52,8 +52,12 @@ def fetch_tumblr():
             d['text'] = p['summary'];
             d['source'] = 'tumblr';
             d['post_url'] = p['post_url'];
-            download(d['url'], d['filename'], os.path.join(os.getcwd(), OUTPUT_IMAGES_DIR))
-            time.sleep(2)
+            full_path = os.path.join(os.getcwd(), OUTPUT_IMAGES_DIR)
+            if(os.path.isfile(full_path)):
+                print(full_path, "already downloaded")
+            else:
+                download(d['url'], d['filename'], full_path)
+                time.sleep(2)
             result.append(d);
     return result
 
